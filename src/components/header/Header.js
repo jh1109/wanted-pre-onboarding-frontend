@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './Header.module.css';
-import Button from '../UI/Button';
+import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <header className={classes.header}>
@@ -9,10 +9,10 @@ const Header = () => {
       <nav className={classes.navigation}>
         <ul>
           <li>
-            <Button>로그인</Button>
+            <Link to="/signin">로그인</Link>
           </li>
           <li>
-            <Button>회원가입</Button>
+            <Link to="/signup">회원가입</Link>
           </li>
         </ul>
       </nav>
