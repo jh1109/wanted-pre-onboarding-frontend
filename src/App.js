@@ -1,10 +1,18 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
+import TodoListPage from './pages/TodoListPage';
+import Main from './pages/Main';
 
 function App() {
   return (
-    <div className="App">
-      <p>사전 과제</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<Main />} />
+      <Route path="/signup" element={<RegisterPage />} />
+      <Route path="/signin" element={<LoginPage />} />
+      <Route path="/todo" element={<TodoListPage />} />
+    </Routes>
   );
 }
 
