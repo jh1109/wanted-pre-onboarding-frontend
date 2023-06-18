@@ -6,6 +6,7 @@
   justify-content: space-between;
   padding: 0 2rem;
   align-items: center;
+  background-color: white;
 }
 .navigation ul{
   list-style: none;
