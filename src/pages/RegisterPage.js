@@ -1,41 +1,24 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 
 import Header from '../components/header/Header';
 
-import MessageModal from '../components/UI/modal/MessageModal';
 import AuthForm from '../components/authority/AuthForm';
-import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
-  const [isRegistered, setIsRegistered] = useState(false);
-
-  const navigate = useNavigate();
-
-  const goSignIn = () => {
-    setTimeout(() => {
-      navigate('/signin');
-    }, 1500);
-  };
-  const registerSubmitHandler = (e) => {
-    e.preventDefault();
-    console.log('회원가입 완료!');
-    // console.log(`id: ${emailInputRef.current.value}`);
-    // console.log(`password: ${passwordInputRef.current.value}`);
-    setIsRegistered(true);
-    goSignIn();
+  const registerSubmitHandler = (email, password) => {
+    console.log(`회원가입! email: ${email}, password: ${password}`);
   };
 
   return (
     <Fragment>
       <Header />
       <main>
-        {isRegistered && (
-          <MessageModal message="회원가입 완료! 로그인 페이지로 이동합니다..." />
-        )}
         <AuthForm
+          modalMessage="회원가입 완료! 로그인 페이지로 이동합니다..."
           onSubmit={registerSubmitHandler}
           btnValue="회원가입"
           btnId="signup-button"
+          onGoAnotherPage="/signin"
         />
       </main>
     </Fragment>
