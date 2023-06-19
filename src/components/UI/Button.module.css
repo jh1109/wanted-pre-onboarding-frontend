@@ -1,0 +1,6 @@
+button:disabled,
+button:focus:disabled,
+button:hover:disabled,
+button:active:disabled {
+  cursor: not-allowed;
+}
