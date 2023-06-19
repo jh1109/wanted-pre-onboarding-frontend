@@ -15,6 +15,7 @@ const RegisterPage = () => {
   const [emailIsValid, setEmailIsValid] = useState(false);
   const [passwordIsValid, setPasswordIsValid] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,6 +33,7 @@ const RegisterPage = () => {
       setPasswordIsValid(false);
     }
   };
+
   const goSignIn = () => {
     setTimeout(() => {
       navigate('/signin');
@@ -51,13 +53,16 @@ const RegisterPage = () => {
     console.log('회원가입 완료!');
     console.log(`id: ${emailInputRef.current.value}`);
     console.log(`password: ${passwordInputRef.current.value}`);
+    setIsRegistered(true);
     goSignIn();
   };
   return (
     <Fragment>
       <Header />
       <main>
-        <MessageModal message="회원가입 완료! 로그인 페이지로 이동합니다..." />
+        {isRegistered && (
+          <MessageModal message="회원가입 완료! 로그인 페이지로 이동합니다..." />
+        )}
         <Card className={classes.form}>
           <form onSubmit={registerSubmitHandler}>
             <div className={classes.input}>
