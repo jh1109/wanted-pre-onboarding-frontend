@@ -5,6 +5,7 @@ import TodoList from '../components/todoList/TodoList';
 import Card from '../components/UI/Card';
 
 import classes from './TodoListPage.module.css';
+import AddTodo from '../components/todoList/AddTodo';
 
 const TodoListPage = () => {
   const todoList = [
@@ -24,6 +25,7 @@ const TodoListPage = () => {
       <Header />
       <main>
         <Card className={classes.todoListCard}>
+          <AddTodo />
           <TodoList todoList={todoList} />
         </Card>
       </main>
