@@ -32,7 +32,11 @@ const RegisterPage = () => {
         {isRegistered && (
           <MessageModal message="회원가입 완료! 로그인 페이지로 이동합니다..." />
         )}
-        <AuthForm onSubmit={registerSubmitHandler} btnValue="회원가입" />
+        <AuthForm
+          onSubmit={registerSubmitHandler}
+          btnValue="회원가입"
+          btnId="signup-button"
+        />
       </main>
     </Fragment>
   );

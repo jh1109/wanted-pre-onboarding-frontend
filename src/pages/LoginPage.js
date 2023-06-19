@@ -11,7 +11,11 @@ const LoginPage = () => {
     <Fragment>
       <Header />
       <main>
-        <AuthForm onSubmit={loginSubmitHandler} btnValue="로그인" />
+        <AuthForm
+          onSubmit={loginSubmitHandler}
+          btnValue="로그인"
+          btnId="signin-button"
+        />
       </main>
     </Fragment>
   );

@@ -5,7 +5,7 @@ import classes from './AuthForm.module.css';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 
-const AuthForm = ({ onSubmit, btnValue }) => {
+const AuthForm = ({ onSubmit, btnValue, btnId }) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const [emailIsValid, setEmailIsValid] = useState(false);
@@ -56,11 +56,7 @@ const AuthForm = ({ onSubmit, btnValue }) => {
             onChange={passwordIsValidHandler}
           />
         </div>
-        <Button
-          type="submit"
-          id="signup-button"
-          button={{ disabled: !formIsValid }}
-        >
+        <Button type="submit" id={btnId} button={{ disabled: !formIsValid }}>
           {btnValue}
         </Button>
       </form>
