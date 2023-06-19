@@ -6,6 +6,7 @@ import Card from '../components/UI/Card';
 
 import classes from './Register.module.css';
 import Input from '../components/UI/Input';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const emailInputRef = useRef();
@@ -13,6 +14,8 @@ const RegisterPage = () => {
   const [emailIsValid, setEmailIsValid] = useState(false);
   const [passwordIsValid, setPasswordIsValid] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
+
+  const navigate = useNavigate();
 
   const emailIsValidHandler = () => {
     if (emailInputRef.current.value.includes('@')) {
@@ -28,6 +31,11 @@ const RegisterPage = () => {
       setPasswordIsValid(false);
     }
   };
+  const goSignIn = () => {
+    setTimeout(() => {
+      navigate('/signin');
+    }, 1000);
+  };
 
   useEffect(() => {
     const formIsValidHandler = setTimeout(() => {
@@ -42,6 +50,7 @@ const RegisterPage = () => {
     console.log('회원가입 완료!');
     console.log(`id: ${emailInputRef.current.value}`);
     console.log(`password: ${passwordInputRef.current.value}`);
+    goSignIn();
   };
   return (
     <Fragment>
