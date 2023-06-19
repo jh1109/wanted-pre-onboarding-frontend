@@ -7,21 +7,21 @@ import Card from '../Card';
 const ModalBackdrop = () => {
   return <div className={classes.backdrop}></div>;
 };
-const ModalOverlay = ({ children }) => {
+const ModalOverlay = ({ className, children }) => {
   return (
     <div className={classes.modal}>
-      <Card className={classes.content}>{children}</Card>
+      <Card className={className}>{children}</Card>
     </div>
   );
 };
 const portalElement = document.getElementById('overlays');
 
-const Modal = ({ children }) => {
+const Modal = ({ className, children }) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(<ModalBackdrop />, portalElement)}
       {ReactDOM.createPortal(
-        <ModalOverlay>{children}</ModalOverlay>,
+        <ModalOverlay className={className}>{children}</ModalOverlay>,
         portalElement,
       )}
     </Fragment>
