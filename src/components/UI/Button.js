@@ -1,8 +1,10 @@
 import React from 'react';
 
-const Button = ({ type, id, onClick, children }) => {
+import './Button.module.css';
+
+const Button = ({ type, id, button, children }) => {
   return (
-    <button type={type || 'button'} data-testid={id} onClick={onClick}>
+    <button type={type || 'button'} data-testid={id} {...button}>
       {children}
     </button>
   );
