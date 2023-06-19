@@ -37,7 +37,7 @@ const RegisterPage = () => {
   const goSignIn = () => {
     setTimeout(() => {
       navigate('/signin');
-    }, 1000);
+    }, 1500);
   };
 
   useEffect(() => {

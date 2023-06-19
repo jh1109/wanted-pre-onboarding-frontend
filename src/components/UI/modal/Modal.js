@@ -9,8 +9,8 @@ const ModalBackdrop = () => {
 };
 const ModalOverlay = ({ className, children }) => {
   return (
-    <div className={classes.modal}>
-      <Card className={className}>{children}</Card>
+    <div className={classes.modalWrapper}>
+      <Card className={`${classes.modal} ${className}`}>{children}</Card>
     </div>
   );
 };
