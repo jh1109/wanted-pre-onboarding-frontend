@@ -7,6 +7,7 @@ import Card from '../components/UI/Card';
 import classes from './Register.module.css';
 import Input from '../components/UI/Input';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../components/UI/modal/Modal';
 
 const RegisterPage = () => {
   const emailInputRef = useRef();
@@ -56,6 +57,9 @@ const RegisterPage = () => {
     <Fragment>
       <Header />
       <main>
+        <Modal>
+          <p>회원가입 완료! 로그인 페이지로 이동합니다.</p>
+        </Modal>
         <Card className={classes.form}>
           <form onSubmit={registerSubmitHandler}>
             <div className={classes.input}>
