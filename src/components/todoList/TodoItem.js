@@ -19,6 +19,9 @@ const TodoItem = ({ item, onToggle, onRemove, onUpdate }) => {
     onUpdate(newItem);
     setEditMode(false);
   };
+  const editCancleHandler = () => {
+    setEditMode(false);
+  };
   return (
     <div className={classes.todoItemWrapper}>
       <label className={classes.label}>
@@ -40,7 +43,10 @@ const TodoItem = ({ item, onToggle, onRemove, onUpdate }) => {
         )}
       </label>
       {editMode ? (
-        <TodoItemEditButton onSubmit={updateTodoSubmitHandler} />
+        <TodoItemEditButton
+          onSubmit={updateTodoSubmitHandler}
+          onCancle={editCancleHandler}
+        />
       ) : (
         <TodoItemButton
           item={item}
