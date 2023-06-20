@@ -4,11 +4,20 @@ import classes from './TodoItem.module.css';
 import TodoItemButton from './todoItemButton/TodoItemButton';
 import TodoItemEditButton from './todoItemButton/TodoItemEditButton';
 
-const TodoItem = ({ item, onToggle, onRemove }) => {
+const TodoItem = ({ item, onToggle, onRemove, onUpdate }) => {
   const [editMode, setEditMode] = useState(false);
+  const [editedTodo, setEditedTodo] = useState(item.todo);
 
   const editModeHandler = () => {
     setEditMode(true);
+  };
+  const updateTodoHandler = (e) => {
+    setEditedTodo(e.target.value);
+  };
+  const updateTodoSubmitHandler = () => {
+    const newItem = { ...item, todo: editedTodo };
+    onUpdate(newItem);
+    setEditMode(false);
   };
   return (
     <div className={classes.todoItemWrapper}>
@@ -20,13 +29,18 @@ const TodoItem = ({ item, onToggle, onRemove }) => {
           className={classes.checkboxInput}
         />
         {editMode ? (
-          <input type="text" className={classes.textInput} />
+          <input
+            type="text"
+            className={classes.textInput}
+            value={editedTodo}
+            onChange={updateTodoHandler}
+          />
         ) : (
           <span>{item.todo}</span>
         )}
       </label>
       {editMode ? (
-        <TodoItemEditButton />
+        <TodoItemEditButton onSubmit={updateTodoSubmitHandler} />
       ) : (
         <TodoItemButton
           item={item}

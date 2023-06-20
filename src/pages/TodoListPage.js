@@ -37,6 +37,16 @@ const TodoListPage = () => {
   const removeTodoListHandler = (id) => {
     setTodoList((todoList) => todoList.filter((item) => item.id !== id));
   };
+  const updateTodoHandler = (newTodo) => {
+    const existingItemIndex = todoList.findIndex(
+      (item) => item.id === newTodo.id,
+    );
+    const existingItem = todoList[existingItemIndex];
+    const updatedItem = { ...existingItem, todo: newTodo.todo };
+    let updatedTodoList = [...todoList];
+    updatedTodoList[existingItemIndex] = updatedItem;
+    setTodoList(updatedTodoList);
+  };
   return (
     <Fragment>
       <Header />
@@ -47,6 +57,7 @@ const TodoListPage = () => {
             todoList={todoList}
             onToggle={checkboxToggleHandler}
             onRemove={removeTodoListHandler}
+            onUpdate={updateTodoHandler}
           />
         </Card>
       </main>
