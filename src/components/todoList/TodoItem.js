@@ -19,7 +19,7 @@ const TodoItem = ({ item, onToggle, onRemove, onUpdate }) => {
     onUpdate(newItem);
     setEditMode(false);
   };
-  const editCancleHandler = () => {
+  const editCancelHandler = () => {
     setEditMode(false);
   };
   return (
@@ -45,7 +45,7 @@ const TodoItem = ({ item, onToggle, onRemove, onUpdate }) => {
       {editMode ? (
         <TodoItemEditButton
           onSubmit={updateTodoSubmitHandler}
-          onCancle={editCancleHandler}
+          onCancel={editCancelHandler}
         />
       ) : (
         <TodoItemButton

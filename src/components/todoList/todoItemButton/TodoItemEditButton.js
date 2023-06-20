@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import Button from '../../UI/Button';
 
-const TodoItemEditButton = ({ onSubmit, onCancle }) => {
+const TodoItemEditButton = ({ onSubmit, onCancel }) => {
   return (
     <Fragment>
-      <Button it="submit-button" button={{ onClick: () => onSubmit() }}>
+      <Button id="submit-button" button={{ onClick: () => onSubmit() }}>
         제출
       </Button>
-      <Button id="cancle-button" button={{ onClick: () => onCancle() }}>
+      <Button id="cancel-button" button={{ onClick: () => onCancel() }}>
         취소
       </Button>
     </Fragment>
