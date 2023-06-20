@@ -34,13 +34,20 @@ const TodoListPage = () => {
     updatedTodoList[existingItemIndex] = updatedItem;
     setTodoList(updatedTodoList);
   };
+  const removeTodoListHandler = (id) => {
+    setTodoList((todoList) => todoList.filter((item) => item.id !== id));
+  };
   return (
     <Fragment>
       <Header />
       <main>
         <Card className={classes.todoListCard}>
           <AddTodo onAdd={addTodoListHandler} />
-          <TodoList todoList={todoList} onToggle={checkboxToggleHandler} />
+          <TodoList
+            todoList={todoList}
+            onToggle={checkboxToggleHandler}
+            onRemove={removeTodoListHandler}
+          />
         </Card>
       </main>
     </Fragment>
