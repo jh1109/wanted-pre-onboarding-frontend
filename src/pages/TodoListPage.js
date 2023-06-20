@@ -26,13 +26,21 @@ const TodoListPage = () => {
       return todoList.concat(item);
     });
   };
+  const checkboxToggleHandler = (id) => {
+    const existingItemIndex = todoList.findIndex((item) => item.id === id);
+    const existingItem = todoList[existingItemIndex];
+    const updatedItem = { ...existingItem, isChecked: !existingItem.isChecked };
+    let updatedTodoList = [...todoList];
+    updatedTodoList[existingItemIndex] = updatedItem;
+    setTodoList(updatedTodoList);
+  };
   return (
     <Fragment>
       <Header />
       <main>
         <Card className={classes.todoListCard}>
           <AddTodo onAdd={addTodoListHandler} />
-          <TodoList todoList={todoList} />
+          <TodoList todoList={todoList} onToggle={checkboxToggleHandler} />
         </Card>
       </main>
     </Fragment>

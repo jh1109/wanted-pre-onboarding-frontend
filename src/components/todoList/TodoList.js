@@ -3,12 +3,12 @@ import React from 'react';
 import classes from './TodoList.module.css';
 import TodoItem from './TodoItem';
 
-const TodoList = ({ todoList }) => {
+const TodoList = ({ todoList, onToggle }) => {
   return (
     <ul className={classes.ul}>
       {todoList.map((item) => (
         <li key={item.id}>
-          <TodoItem item={item} />
+          <TodoItem item={item} onToggle={onToggle} />
         </li>
       ))}
     </ul>
