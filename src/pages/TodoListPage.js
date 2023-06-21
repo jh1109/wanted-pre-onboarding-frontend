@@ -25,7 +25,7 @@ const TodoListPage = () => {
           setTodo(res.data);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data.message));
   }, [Axios]);
   useLayoutEffect(() => {
     if (localStorage.getItem('access_token')) {
@@ -39,7 +39,7 @@ const TodoListPage = () => {
       .then((res) => {
         setTodo((todo) => todo.concat(res.data));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data.message));
   };
   const removeTodoListHandler = (id) => {
     Axios.delete('/' + id)
@@ -48,7 +48,7 @@ const TodoListPage = () => {
           getTodo();
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data.message));
   };
 
   const updateTodoHandler = (id, todo, isCompleted) => {
@@ -61,7 +61,7 @@ const TodoListPage = () => {
           getTodo();
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data.message));
   };
   return (
     <Fragment>
