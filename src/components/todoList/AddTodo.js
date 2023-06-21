@@ -9,11 +9,6 @@ const AddTodo = ({ onAdd }) => {
 
   const addTodoHandler = (e) => {
     e.preventDefault();
-    // const newItem = {
-    //   id: Math.random().toString(),
-    //   isChecked: false,
-    //   todo: todoInputRef.current.value,
-    // };
     onAdd(todoInputRef.current.value);
     todoInputRef.current.value = '';
   };
