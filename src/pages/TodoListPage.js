@@ -37,17 +37,6 @@ const TodoListPage = () => {
       })
       .catch((err) => console.log(err));
   };
-  // const checkboxToggleHandler = (id) => {
-  //   const existingItemIndex = todoList.findIndex((item) => item.id === id);
-  //   const existingItem = todoList[existingItemIndex];
-  //   const updatedItem = {
-  //     ...existingItem,
-  //     isCompleted: !existingItem.isCompleted,
-  //   };
-  //   let updatedTodoList = [...todoList];
-  //   updatedTodoList[existingItemIndex] = updatedItem;
-  //   setTodoList(updatedTodoList);
-  // };
   const removeTodoListHandler = (id) => {
     Axios.delete('/' + id)
       .then((res) => {
@@ -78,7 +67,6 @@ const TodoListPage = () => {
           <AddTodo onAdd={addTodoListHandler} />
           <TodoList
             todoList={todo}
-            // onToggle={checkboxToggleHandler}
             onRemove={removeTodoListHandler}
             onUpdate={updateTodoHandler}
           />

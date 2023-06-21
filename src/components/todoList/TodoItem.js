@@ -4,7 +4,7 @@ import classes from './TodoItem.module.css';
 import TodoItemButton from './todoItemButton/TodoItemButton';
 import TodoItemEditButton from './todoItemButton/TodoItemEditButton';
 
-const TodoItem = ({ item, onToggle, onRemove, onUpdate }) => {
+const TodoItem = ({ item, onRemove, onUpdate }) => {
   const [editMode, setEditMode] = useState(false);
   const [editedTodo, setEditedTodo] = useState(item.todo);
 
@@ -28,7 +28,9 @@ const TodoItem = ({ item, onToggle, onRemove, onUpdate }) => {
         <input
           type="checkbox"
           checked={item.isCompleted}
-          onChange={() => onToggle(item.id)}
+          onChange={() => {
+            onUpdate(item.id, item.todo, !item.isCompleted);
+          }}
           className={classes.checkboxInput}
         />
         {editMode ? (
