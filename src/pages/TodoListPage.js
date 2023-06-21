@@ -9,21 +9,6 @@ import AddTodo from '../components/todoList/AddTodo';
 import axios from 'axios';
 
 const TodoListPage = () => {
-  // const data = [
-  //   {
-  //     id: 'todo1',
-  //     isCompleted: false,
-  //     todo: '해야 할 일 1',
-  //     userId: 1,
-  //   },
-  //   {
-  //     id: 'todo2',
-  //     isCompleted: true,
-  //     todo: '해야 할 일 2',
-  //     userId: 1,
-  //   },
-  // ];
-  // const [todoList, setTodoList] = useState([]);
   const [todo, setTodo] = useState([]);
 
   const Axios = axios.create({
@@ -33,18 +18,24 @@ const TodoListPage = () => {
       Authorization: 'Bearer ' + localStorage.getItem('access_token'),
     },
   });
-
+  const getTodo = () => {
+    Axios.get()
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data);
+          setTodo(res.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   const addTodoListHandler = (todo) => {
     Axios.post('', {
       todo: todo,
     })
       .then((res) => {
-        setTodo((todo) => [...todo, res.data]);
+        setTodo((todo) => todo.concat(res.data));
       })
       .catch((err) => console.log(err));
-    // setTodoList((todoList) => {
-    // return todoList.concat(item);
-    // });
   };
   // const checkboxToggleHandler = (id) => {
   //   const existingItemIndex = todoList.findIndex((item) => item.id === id);
@@ -60,16 +51,19 @@ const TodoListPage = () => {
   // const removeTodoListHandler = (id) => {
   //   setTodoList((todoList) => todoList.filter((item) => item.id !== id));
   // };
-  // const updateTodoHandler = (newTodo) => {
-  //   const existingItemIndex = todoList.findIndex(
-  //     (item) => item.id === newTodo.id,
-  //   );
-  //   const existingItem = todoList[existingItemIndex];
-  //   const updatedItem = { ...existingItem, todo: newTodo.todo };
-  //   let updatedTodoList = [...todoList];
-  //   updatedTodoList[existingItemIndex] = updatedItem;
-  //   setTodoList(updatedTodoList);
-  // };
+
+  const updateTodoHandler = (id, todo, isCompleted) => {
+    Axios.put('/' + id, {
+      todo,
+      isCompleted,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          getTodo();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <Fragment>
       <Header />
@@ -80,7 +74,7 @@ const TodoListPage = () => {
             todoList={todo}
             // onToggle={checkboxToggleHandler}
             // onRemove={removeTodoListHandler}
-            // onUpdate={updateTodoHandler}
+            onUpdate={updateTodoHandler}
           />
         </Card>
       </main>

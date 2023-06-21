@@ -16,7 +16,7 @@ const TodoItem = ({ item, onToggle, onRemove, onUpdate }) => {
   };
   const updateTodoSubmitHandler = () => {
     const newItem = { ...item, todo: editedTodo };
-    onUpdate(newItem);
+    onUpdate(newItem.id, newItem.todo, newItem.isCompleted);
     setEditMode(false);
   };
   const editCancelHandler = () => {
