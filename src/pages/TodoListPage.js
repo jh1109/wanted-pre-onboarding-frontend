@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useLayoutEffect, useState, useCallback } from 'react';
 
 import Header from '../components/header/Header';
 import TodoList from '../components/todoList/TodoList';
@@ -6,46 +6,62 @@ import Card from '../components/UI/Card';
 
 import classes from './TodoListPage.module.css';
 import AddTodo from '../components/todoList/AddTodo';
+import axios from 'axios';
 
 const TodoListPage = () => {
-  const data = [
-    {
-      id: 'todo1',
-      isChecked: false,
-      todo: '해야 할 일 1',
+  const [todo, setTodo] = useState([]);
+
+  const Axios = axios.create({
+    baseURL: 'https://www.pre-onboarding-selection-task.shop/todos',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('access_token'),
     },
-    {
-      id: 'todo2',
-      isChecked: true,
-      todo: '해야 할 일 2',
-    },
-  ];
-  const [todoList, setTodoList] = useState(data);
-  const addTodoListHandler = (item) => {
-    setTodoList((todoList) => {
-      return todoList.concat(item);
-    });
-  };
-  const checkboxToggleHandler = (id) => {
-    const existingItemIndex = todoList.findIndex((item) => item.id === id);
-    const existingItem = todoList[existingItemIndex];
-    const updatedItem = { ...existingItem, isChecked: !existingItem.isChecked };
-    let updatedTodoList = [...todoList];
-    updatedTodoList[existingItemIndex] = updatedItem;
-    setTodoList(updatedTodoList);
+  });
+  const getTodo = useCallback(() => {
+    Axios.get()
+      .then((res) => {
+        if (res.status === 200) {
+          setTodo(res.data);
+        }
+      })
+      .catch((err) => alert(err.response.data.message));
+  }, [Axios]);
+  useLayoutEffect(() => {
+    if (localStorage.getItem('access_token')) {
+      getTodo();
+    }
+  }, []);
+  const addTodoListHandler = (todo) => {
+    Axios.post('', {
+      todo: todo,
+    })
+      .then((res) => {
+        setTodo((todo) => todo.concat(res.data));
+      })
+      .catch((err) => alert(err.response.data.message));
   };
   const removeTodoListHandler = (id) => {
-    setTodoList((todoList) => todoList.filter((item) => item.id !== id));
+    Axios.delete('/' + id)
+      .then((res) => {
+        if (res.status === 204) {
+          getTodo();
+        }
+      })
+      .catch((err) => alert(err.response.data.message));
   };
-  const updateTodoHandler = (newTodo) => {
-    const existingItemIndex = todoList.findIndex(
-      (item) => item.id === newTodo.id,
-    );
-    const existingItem = todoList[existingItemIndex];
-    const updatedItem = { ...existingItem, todo: newTodo.todo };
-    let updatedTodoList = [...todoList];
-    updatedTodoList[existingItemIndex] = updatedItem;
-    setTodoList(updatedTodoList);
+
+  const updateTodoHandler = (id, todo, isCompleted) => {
+    Axios.put('/' + id, {
+      todo,
+      isCompleted,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          getTodo();
+        }
+      })
+      .catch((err) => alert(err.response.data.message));
   };
   return (
     <Fragment>
@@ -54,8 +70,7 @@ const TodoListPage = () => {
         <Card className={classes.todoListCard}>
           <AddTodo onAdd={addTodoListHandler} />
           <TodoList
-            todoList={todoList}
-            onToggle={checkboxToggleHandler}
+            todoList={todo}
             onRemove={removeTodoListHandler}
             onUpdate={updateTodoHandler}
           />
