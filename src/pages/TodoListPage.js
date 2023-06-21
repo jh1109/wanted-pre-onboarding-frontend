@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useLayoutEffect, useState, useCallback } from 'react';
 
 import Header from '../components/header/Header';
 import TodoList from '../components/todoList/TodoList';
@@ -18,16 +18,20 @@ const TodoListPage = () => {
       Authorization: 'Bearer ' + localStorage.getItem('access_token'),
     },
   });
-  const getTodo = () => {
+  const getTodo = useCallback(() => {
     Axios.get()
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data);
           setTodo(res.data);
         }
       })
       .catch((err) => console.log(err));
-  };
+  }, [Axios]);
+  useLayoutEffect(() => {
+    if (localStorage.getItem('access_token')) {
+      getTodo();
+    }
+  }, []);
   const addTodoListHandler = (todo) => {
     Axios.post('', {
       todo: todo,
