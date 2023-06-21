@@ -6,21 +6,25 @@ import Card from '../components/UI/Card';
 
 import classes from './TodoListPage.module.css';
 import AddTodo from '../components/todoList/AddTodo';
+import axios from 'axios';
 
 const TodoListPage = () => {
   const data = [
     {
       id: 'todo1',
-      isChecked: false,
+      isCompleted: false,
       todo: '해야 할 일 1',
+      userId: 1,
     },
     {
       id: 'todo2',
-      isChecked: true,
+      isCompleted: true,
       todo: '해야 할 일 2',
+      userId: 1,
     },
   ];
   const [todoList, setTodoList] = useState(data);
+
   const addTodoListHandler = (item) => {
     setTodoList((todoList) => {
       return todoList.concat(item);
@@ -29,7 +33,10 @@ const TodoListPage = () => {
   const checkboxToggleHandler = (id) => {
     const existingItemIndex = todoList.findIndex((item) => item.id === id);
     const existingItem = todoList[existingItemIndex];
-    const updatedItem = { ...existingItem, isChecked: !existingItem.isChecked };
+    const updatedItem = {
+      ...existingItem,
+      isCompleted: !existingItem.isCompleted,
+    };
     let updatedTodoList = [...todoList];
     updatedTodoList[existingItemIndex] = updatedItem;
     setTodoList(updatedTodoList);

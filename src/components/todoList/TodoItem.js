@@ -27,7 +27,7 @@ const TodoItem = ({ item, onToggle, onRemove, onUpdate }) => {
       <label className={classes.label}>
         <input
           type="checkbox"
-          checked={item.isChecked}
+          checked={item.isCompleted}
           onChange={() => onToggle(item.id)}
           className={classes.checkboxInput}
         />
