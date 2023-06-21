@@ -36,6 +36,7 @@ const TodoItem = ({ item, onRemove, onUpdate }) => {
         {editMode ? (
           <input
             type="text"
+            data-testid="modify-input"
             className={classes.textInput}
             value={editedTodo}
             onChange={updateTodoHandler}
