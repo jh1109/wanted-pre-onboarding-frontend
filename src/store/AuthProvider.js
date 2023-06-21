@@ -30,10 +30,10 @@ const AuthProvider = ({ children }) => {
       )
       .then((response) => {
         localStorage.setItem('access_token', response.data['access_token']);
-        setTimeout(() => {
-          navigate('/todo');
-        }, 1500);
         setIsLogin(true);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       })
       .catch((error) => {
         alert(error.response.data.message);
